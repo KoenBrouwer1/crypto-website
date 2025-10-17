@@ -14,37 +14,51 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="flex items-center justify-center min-h-screen dark:bg-gray-800">
-            <div className="p-10 max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-900 dark:border-gray-500">
-                <ul className="overflow-y-auto h-96 space-y-4">
+        <div className="min-h-screen bg-white dark:bg-gray-900 p-6">
+            <table className="w-full text-left border-collapse border border-gray-200 dark:border-gray-800">
+                <thead>
+                    <tr className="bg-gray-200 dark:bg-gray-800">
+                        <th>Logo</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Change (24h)</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {cryptoData.map((crypto) => (
-                        <li key={crypto.id}>
-                            <img
-                                className="w-10 h-10 rounded-full"
-                                src={crypto.image}
-                                alt={crypto.name}
-                            />
-                            <a
-                                className="font-bold"
-                                href={`https://coinmarketcap.com/currencies/${crypto.name}`}
-                                target="_blank"
-                            >
-                                {crypto.name} ({crypto.symbol.toUpperCase()}): €
-                                {crypto.current_price}
-                            </a>
-                            {crypto.price_change_percentage_24h >= 0 ? (
-                                <span style={{ color: "green" }}>
-                                    ▲ {crypto.price_change_percentage_24h.toFixed(2)}%
-                                </span>
-                            ) : (
-                                <span style={{ color: "red" }}>
-                                    ▼ {crypto.price_change_percentage_24h.toFixed(2)}%
-                                </span>
-                            )}
-                        </li>
+                        <tr key={crypto.id}>
+                            <td>
+                                <img
+                                    className="w-10 h-10 rounded-full"
+                                    src={crypto.image}
+                                    alt={crypto.name}
+                                />
+                            </td>
+                            <td>
+                                <a
+                                    className="font-bold"
+                                    href={`https://coinmarketcap.com/currencies/${crypto.name}`}
+                                    target="_blank"
+                                >
+                                    {crypto.name} ({crypto.symbol.toUpperCase()}): €
+                                    {crypto.current_price}
+                                </a>
+                            </td>
+                            <td>
+                                {crypto.price_change_percentage_24h >= 0 ? (
+                                    <span style={{ color: "green" }}>
+                                        ▲ {crypto.price_change_percentage_24h.toFixed(2)}%
+                                    </span>
+                                ) : (
+                                    <span style={{ color: "red" }}>
+                                        ▼ {crypto.price_change_percentage_24h.toFixed(2)}%
+                                    </span>
+                                )}
+                            </td>
+                        </tr>
                     ))}
-                </ul>
-            </div>
+                </tbody>
+            </table>
         </div>
     );
 }
