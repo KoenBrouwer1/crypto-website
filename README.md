@@ -2,9 +2,11 @@
 
 Simple site showing live cryptocurrency prices.
 
-Prerequisites: Node.js 18+
+## Made with
 
-Install & run:
+React and Tailwind
+
+### Install & run:
 ```bash
 npm install
 npm run dev
@@ -13,5 +15,3 @@ npm run dev
 Open http://localhost:3000
 
 Uses a public API (e.g., CoinGecko). Configure via `.env.local` if needed.
-
-License: MIT
