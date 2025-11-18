@@ -1,69 +1,33 @@
-"use client";
-import { useEffect, useState } from "react";
-
-import Link from "next/link";
-
 export default function Home() {
-    const [cryptoData, setCryptoData] = useState([]);
-
-    useEffect(() => {
-        fetch(
-            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&ids=bitcoin,ethereum,solana,dogecoin,tether,tron,stellar,binancecoin,pepe,ripple,official-trump&order=market_cap_desc&sparkline=false"
-        )
-            .then((response) => response.json())
-            .then((data) => setCryptoData(data))
-            .catch((error) => console.error(error));
-}, []);
-return (
-        <div className="min-h-screen bg-white dark:bg-gray-900 p-6">
-            <Link href="/sparkline">Go to Sparkline Page</Link>
-            <table className="w-full text-left border-collapse border border-gray-200 dark:border-gray-700">
-                <thead>
-                    <tr className="bg-gray-200 dark:bg-gray-700 m-1">
-                        <th className="m-1">Logo</th>
-                        <th className="m-1">Name</th>
-                        <th className="m-1">Price</th>
-                        <th className="m-1">Change (24h)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {cryptoData.map((crypto) => (
-                        <tr key={crypto.id} className="m-1">
-                            <td className="m-1">
-                                <img
-                                    className="w-10 h-10 rounded-full m-1"
-                                    src={crypto.image}
-                                    alt={crypto.name}
-                                />
-                            </td>
-                            <td className="m-1">
-                                <a
-                                    className="font-bold m-1"
-                                    href={`https://coinmarketcap.com/currencies/${crypto.name}`}
-                                    target="_blank"
-                                >
-                                    {crypto.name} ({crypto.symbol.toUpperCase()}):
+    return (
+        <div className="bg-black">
+            <nav className="fixed top-0 left-0 w-full z-50 bg-white/0 border-gray-200 ">
+                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                    <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                        <span className="self-center text-2xl whitespace-nowrap dark:text-white">
+                            Home
+                        </span>
+                    </a>
+                    <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+                        <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50/0 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white/0 dark:bg-gray-800/0 md:dark:bg-gray-900/0 dark:border-gray-700">
+                            <li>
+                                <a href="/cryptocoins" className="text-white hover:text-blue-500">
+                                    coins
                                 </a>
-                            </td>
-                            <td className="m-1"> 
-                                €   {crypto.current_price} 
-                            </td>
-                            <td className="m-1">
-                                {crypto.price_change_percentage_24h >= 0 ? (
-                                    <span style={{ color: "green" }}>
-                                        ▲ {crypto.price_change_percentage_24h.toFixed(2)}%
-                                    </span>
-                                ) : (
-                                    <span style={{ color: "red" }}>
-                                        ▼ {crypto.price_change_percentage_24h.toFixed(2)}%
-                                    </span>
-                                )}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                            </li>
+                            <li>
+                                <a href="/sparkline" className="text-white hover:text-blue-500">
+                                    sparkline
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <main className="flex flex-col items-center justify-center text-white min-h-screen p-6">
+                <h1 className="font-bold text-4xl text-center">Welcome to the Home Page!</h1>
+                <img src="/img/bitcoin.png" className="w-[500px] h-auto" alt="bitcoin" />
+            </main>
         </div>
-        
     );
 }
