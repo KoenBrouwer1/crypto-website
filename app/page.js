@@ -27,7 +27,7 @@ export default function Home() {
                 <div className="flex flex-col mr-12">
                     <h1 className="text-5xl font-bold text-white mb-4">Welcome to CryptoPage</h1>
                     <p className="text-xl text-gray-300 mb-8">
-                        Explore the latest in cryptocurrency and market trends.
+                        Explore the latest in cryptocurrency.
                     </p>
                     <div className="flex gap-4">
                         <a href="/cryptocoins" className="px-6 py-3 bg-blue-500 text-white rounded-lg">View Coins</a>
