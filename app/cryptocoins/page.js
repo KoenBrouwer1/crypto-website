@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function CryptoPage() {
@@ -88,7 +89,9 @@ export default function CryptoPage() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        {crypto.name} <span className="text-gray-400">({crypto.symbol.toUpperCase()})</span>
+                                      <Link href={`/cryptocoins/${crypto.id}`}>
+                                          {crypto.name} <span className="text-gray-400">({crypto.symbol.toUpperCase()})</span>
+                                      </Link>
                                     </a>
                                 </td>
                                 <td className="p-4 text-white font-semibold">
