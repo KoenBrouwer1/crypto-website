@@ -26,8 +26,8 @@ export default function CoinDetailPage({ params }) {
         return <div className="min-h-screen bg-gray-900 p-6 text-white">Loading...</div>;
     }
 
-    if (!coinData) {
-        return <div className="min-h-screen bg-gray-900 p-6 text-white">Coin not found</div>;
+    if (!coinData) {  
+       return <div className="min-h-screen bg-gray-900 p-6 text-white">Coin not found</div>;
     }
 
     return (
