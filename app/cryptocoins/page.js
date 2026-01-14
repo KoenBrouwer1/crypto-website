@@ -59,69 +59,79 @@ export default function CryptoPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-900 p-6">
-            <h1 className="text-3xl font-bold text-white mb-6">Cryptocurrency Tracker</h1>
-            <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse bg-gray-800 rounded-lg overflow-hidden">
-                    <thead>
-                        <tr className="bg-gray-700">
-                            <th className="p-4 text-gray-300 font-semibold">Logo</th>
-                            <th className="p-4 text-gray-300 font-semibold">Name</th>
-                            <th className="p-4 text-gray-300 font-semibold">Price</th>
-                            <th className="p-4 text-gray-300 font-semibold">Change (24h)</th>
-                            <th className="p-4 text-gray-300 font-semibold">Last 7 Days</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {cryptoData.map((crypto) => (
-                            <tr key={crypto.id} className="border-t border-gray-700 hover:bg-gray-750">
-                                <td className="p-4">
-                                    <img
-                                        className="w-10 h-10 rounded-full"
-                                        src={crypto.image}
-                                        alt={crypto.name}
-                                    />
-                                </td>
-                                <td className="p-4">
-                                    <a
-                                        className="font-bold text-white hover:text-blue-400 transition-colors"
-                                        href={`https://coinmarketcap.com/currencies/${crypto.id}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                      <Link href={`/cryptocoins/${crypto.id}`}>
-                                          {crypto.name} <span className="text-gray-400">({crypto.symbol.toUpperCase()})</span>
-                                      </Link>
-                                    </a>
-                                </td>
-                                <td className="p-4 text-white font-semibold">
-                                    ${crypto.current_price.toLocaleString(undefined, {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2
-                                    })}
-                                </td>
-                                <td className="p-4">
-                                    {crypto.price_change_percentage_24h >= 0 ? (
-                                        <span className="text-green-500 font-semibold">
-                                            ▲ {crypto.price_change_percentage_24h.toFixed(2)}%
-                                        </span>
-                                    ) : (
-                                        <span className="text-red-500 font-semibold">
-                                            ▼ {Math.abs(crypto.price_change_percentage_24h).toFixed(2)}%
-                                        </span>
-                                    )}
-                                </td>
-                                <td className="p-4">
-                                    <Sparkline
-                                        data={crypto.sparkline_in_7d?.price || []}
-                                        isPositive={crypto.price_change_percentage_24h >= 0}
-                                    />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+      <div className="min-h-screen bg-gray-900 p-6">
+        <h1 className="text-3xl font-bold text-white mb-6">Cryptocurrency Tracker</h1>
+      
+        {/* desktop */}
+        <div className="hidden md:block overflow-x-auto">
+          <table className="w-full text-left border-collapse bg-gray-800 rounded-lg overflow-hidden">
+            <thead>
+              <tr className="bg-gray-700">
+                <th className="p-4 text-gray-300 font-semibold">Logo</th>
+                <th className="p-4 text-gray-300 font-semibold">Name</th>
+                <th className="p-4 text-gray-300 font-semibold">Price</th>
+                <th className="p-4 text-gray-300 font-semibold">Change (24h)</th>
+                <th className="p-4 text-gray-300 font-semibold">Last 7 Days</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cryptoData.map((crypto) => (
+                <tr key={crypto.id} className="border-t border-gray-700 hover:bg-gray-750">
+                  <td className="p-4"><img className="w-10 h-10 rounded-full" src={crypto.image} alt={crypto.name} /></td>
+                  <td className="p-4">
+                    <Link href={`/cryptocoins/${crypto.id}`} className="font-bold text-white hover:text-blue-400 transition-colors">
+                      {crypto.name} <span className="text-gray-400">({crypto.symbol.toUpperCase()})</span>
+                    </Link>
+                  </td>
+                  <td className="p-4 text-white font-semibold">
+                    ${crypto.current_price.toFixed(2)}
+                  </td>
+                  <td className="p-4">
+                    {crypto.price_change_percentage_24h >= 0 ? (
+                      <span className="text-green-500 font-semibold">▲ {crypto.price_change_percentage_24h.toFixed(2)}%</span>
+                    ) : (
+                      <span className="text-red-500 font-semibold">▼ {Math.abs(crypto.price_change_percentage_24h).toFixed(2)}%</span>
+                    )}
+                  </td>
+                  <td className="p-4">
+                    <Sparkline data={crypto.sparkline_in_7d?.price || []} isPositive={crypto.price_change_percentage_24h >= 0}/>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+      
+        {/* mobile stacked cards */}
+        <div className="md:hidden space-y-4">
+          {cryptoData.map((crypto) => (
+            <div key={crypto.id} className="bg-gray-800 rounded-lg p-4 flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                <img className="w-10 h-10 rounded-full" src={crypto.image} alt={crypto.name} />
+                <Link href={`/cryptocoins/${crypto.id}`} className="font-bold text-white hover:text-blue-400">
+                  {crypto.name} <span className="text-gray-400">({crypto.symbol.toUpperCase()})</span>
+                </Link>
+              </div>
+      
+              <div className="text-white font-semibold">
+                ${crypto.current_price.toFixed(2)}
+              </div>
+      
+              <div>
+                {crypto.price_change_percentage_24h >= 0 ? (
+                  <span className="text-green-500 font-semibold">▲ {crypto.price_change_percentage_24h.toFixed(2)}%</span>
+                ) : (
+                  <span className="text-red-500 font-semibold">▼ {Math.abs(crypto.price_change_percentage_24h).toFixed(2)}%</span>
+                )}
+              </div>
+      
+              <div>
+                <Sparkline data={crypto.sparkline_in_7d?.price || []} isPositive={crypto.price_change_percentage_24h >= 0}/>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
     );
 }

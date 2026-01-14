@@ -34,7 +34,6 @@ export default function CoinDetailPage({ params }) {
         <div className="min-h-screen bg-gray-900 p-6 text-white">
             <h1 className="text-4xl font-bold">{coinData.name}</h1>
             <p className="text-2xl mt-4">${coinData.market_data.current_price.usd}</p>
-            {/* Add more d  ata here */}
         </div>
     );
 }
