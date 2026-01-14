@@ -8,7 +8,7 @@ export default function CryptoPage() {
 
     useEffect(() => {
         fetch(
-            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&ids=bitcoin,ethereum,solana,dogecoin,tether,tron,stellar,binancecoin,pepe,ripple,official-trump&order=market_cap_desc&sparkline=true&sparkline_in_7d=true"
+            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=24h"
         )
             .then((response) => response.json())
             .then((data) => {
@@ -60,8 +60,6 @@ export default function CryptoPage() {
 
     return (
       <div className="min-h-screen bg-gray-900 p-6">
-        <h1 className="text-3xl font-bold text-white mb-6">Cryptocurrency Tracker</h1>
-      
         {/* desktop */}
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse bg-gray-800 rounded-lg overflow-hidden">
