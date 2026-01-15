@@ -1,43 +1,47 @@
-"use client";
+"use client"; //moet client side worden gerenderd
+
+//import 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 
 export default function CryptoPage() {
+  //haalt gegevens op
     const [cryptoData, setCryptoData] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(
-            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=24h"
-        )
+        // Haal crypto data op van de CoinGecko API bij de eerste render
+        fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=24h")
             .then((response) => response.json())
             .then((data) => {
-                setCryptoData(data);
-                setLoading(false);
+                setCryptoData(data); // Zet de opgehaalde data in state
+                setLoading(false);   // Stop de loading indicator
             })
             .catch((error) => {
                 console.error(error);
                 setLoading(false);
             });
-    }, []);
+    }, []); // Alleen uitvoeren bij de eerste render
 
     const Sparkline = ({ data, isPositive }) => {
         if (!data || data.length === 0) return null;
-
+        // de sparkline
         const width = 120;
         const height = 40;
         const padding = 2;
-
+      // schaalt de sparkline
         const max = Math.max(...data);
         const min = Math.min(...data);
         const range = max - min || 1;
-
+        
+        // Bereken coördinaten voor elk punt in de sparkline grafiek
         const points = data.map((value, index) => {
             const x = (index / (data.length - 1)) * (width - padding * 2) + padding;
             const y = height - padding - ((value - min) / range) * (height - padding * 2);
             return `${x},${y}`;
         }).join(' ');
+
 
         return (
             <svg width={width} height={height} className="inline-block">
@@ -62,15 +66,13 @@ export default function CryptoPage() {
   return (
   <main>
      <Head>
-       <meta name="description" content="Live crypto prijzen, trends en market cap gegevens." />
-       <meta name="viewport" content="width=device-width, initial-scale=1" />
-       <meta property="og:title" content="Crypto Markt Overzicht" />
-       <meta property="og:description" content="Bekijk live prijzen, winsten/verliezen en trends van top cryptomunten." />
+      <meta name="description"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
      </Head>
    
   
       <div className="min-h-screen bg-gray-900 p-6">
-        {/* desktop */}
+        {/* desktop start */
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse bg-gray-800 rounded-lg overflow-hidden">
             <thead>
@@ -109,8 +111,8 @@ export default function CryptoPage() {
             </tbody>
           </table>
         </div>
-      
-        {/* mobile stacked cards */}
+      // destop end
+        {/* mobile start */}
         <div className="md:hidden space-y-4">
           {cryptoData.map((crypto) => (
             <div key={crypto.id} className="bg-gray-800 rounded-lg p-4 flex flex-col gap-2">
@@ -140,6 +142,7 @@ export default function CryptoPage() {
           ))}
         </div>
       </div>
+      {/* mobile end*/}
   </main>
     );
 }
