@@ -5,7 +5,6 @@ export default function CoinDetailPage({ params }) {
     const [coinData, setCoinData] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // the coin id thingy.
     const coinId = params.id;
 
     useEffect(() => {

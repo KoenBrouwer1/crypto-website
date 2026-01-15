@@ -11,7 +11,7 @@ export default function CryptoPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Haal crypto data op van de CoinGecko API bij de eerste render
+        // Haal crypto data op van de api
         fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=24h")
             .then((response) => response.json())
             .then((data) => {
@@ -73,7 +73,7 @@ export default function CryptoPage() {
   
       <div className="min-h-screen bg-gray-900 p-6">
         {/* desktop start */}
-        <div className="hidden md:block overflow-x-auto">
+        <div className="hidden md:block overflow-x-auto"> {/*hide voor phone*/}
           <table className="w-full text-left border-collapse bg-gray-800 rounded-lg overflow-hidden">
             <thead>
               <tr className="bg-gray-700">
@@ -85,7 +85,7 @@ export default function CryptoPage() {
               </tr>
             </thead>
             <tbody>
-              {cryptoData.map((crypto) => (
+              {cryptoData.map((crypto) => ( // pakt alle info
                 <tr key={crypto.id} className="border-t border-gray-700 hover:bg-gray-750">
                   <td className="p-4"><img className="w-10 h-10 rounded-full" src={crypto.image} alt={crypto.name} /></td>
                   <td className="p-4">
@@ -114,7 +114,7 @@ export default function CryptoPage() {
         {/* destop end*/}
 
         {/* mobile start */}
-        <div className="md:hidden space-y-4">
+        <div className="md:hidden space-y-4"> {/* hide voor laptop / computer */}
           {cryptoData.map((crypto) => (
             <div key={crypto.id} className="bg-gray-800 rounded-lg p-4 flex flex-col gap-2">
               <div className="flex items-center gap-3">
