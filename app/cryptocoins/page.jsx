@@ -22,7 +22,7 @@ export default function CryptoPage() {
                 console.error(error);
                 setLoading(false);
             });
-    }, []); // Alleen uitvoeren bij de eerste render
+    }, []);
 
     const Sparkline = ({ data, isPositive }) => {
         if (!data || data.length === 0) return null;
@@ -72,7 +72,7 @@ export default function CryptoPage() {
    
   
       <div className="min-h-screen bg-gray-900 p-6">
-        {/* desktop start */
+        {/* desktop start */}
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse bg-gray-800 rounded-lg overflow-hidden">
             <thead>
@@ -111,7 +111,8 @@ export default function CryptoPage() {
             </tbody>
           </table>
         </div>
-      // destop end
+        {/* destop end*/}
+
         {/* mobile start */}
         <div className="md:hidden space-y-4">
           {cryptoData.map((crypto) => (
