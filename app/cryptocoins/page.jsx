@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 export default function CryptoPage() {
     const [cryptoData, setCryptoData] = useState([]);
@@ -8,7 +9,7 @@ export default function CryptoPage() {
 
     useEffect(() => {
         fetch(
-            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=24h"
+            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=24h"
         )
             .then((response) => response.json())
             .then((data) => {
@@ -58,7 +59,16 @@ export default function CryptoPage() {
         );
     }
 
-    return (
+  return (
+  <main>
+     <Head>
+       <meta name="description" content="Live crypto prijzen, trends en market cap gegevens." />
+       <meta name="viewport" content="width=device-width, initial-scale=1" />
+       <meta property="og:title" content="Crypto Markt Overzicht" />
+       <meta property="og:description" content="Bekijk live prijzen, winsten/verliezen en trends van top cryptomunten." />
+     </Head>
+   
+  
       <div className="min-h-screen bg-gray-900 p-6">
         {/* desktop */}
         <div className="hidden md:block overflow-x-auto">
@@ -130,6 +140,6 @@ export default function CryptoPage() {
           ))}
         </div>
       </div>
-
+  </main>
     );
 }
