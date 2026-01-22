@@ -12,7 +12,7 @@ export default function CryptoPage() {
 
     useEffect(() => {
         // Haal crypto data op van de api
-        fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=24h")
+        fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=24h")
             .then((response) => response.json())
             .then((data) => {
                 setCryptoData(data); // Zet de opgehaalde data in state
@@ -100,7 +100,7 @@ export default function CryptoPage() {
                     {crypto.price_change_percentage_24h >= 0 ? (
                       <span className="text-green-500 font-semibold">▲ {crypto.price_change_percentage_24h.toFixed(2)}%</span>
                     ) : (
-                      <span className="text-red-500 font-semibold">▼ {Math.abs(crypto.price_change_percentage_24h).toFixed(2)}%</span>
+                      <span className="text-red-500 font-semibold">▼ {(crypto.price_change_percentage_24h).toFixed(2)}%</span>
                     )}
                   </td>
                   <td className="p-4">
