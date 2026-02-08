@@ -64,7 +64,20 @@ export default function CryptoPage() {
     }
 
   return (
-  <main>
+    <main className="pt-16">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-gray-800 border-b border-gray-700">
+        <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
+          <Link href="/" className="font-bold text-2xl sm:text-3xl">
+            CryptoPage
+          </Link>
+
+          <div className="flex gap-6 sm:gap-10 text-base sm:text-lg">
+            <Link href="/cryptocoins" className="hover:text-blue-400 transition">
+              Coins
+            </Link>
+          </div>
+        </div>
+      </nav>
      <Head>
       <meta name="description"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>

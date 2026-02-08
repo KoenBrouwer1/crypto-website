@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function CoinDetailPage({ params }) {
     const [coinData, setCoinData] = useState(null);
@@ -30,7 +31,20 @@ export default function CoinDetailPage({ params }) {
     }
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white px-6 py-10">
+    <main className="min-h-screen bg-gray-900 text-white px-6 py-10 pt-20">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-gray-800 border-b border-gray-700">
+        <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
+          <Link href="/" className="font-bold text-2xl sm:text-3xl">
+            CryptoPage
+          </Link>
+
+          <div className="flex gap-6 sm:gap-10 text-base sm:text-lg">
+            <Link href="/cryptocoins" className="hover:text-blue-400 transition">
+              Coins
+            </Link>
+          </div>
+        </div>
+      </nav>
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
